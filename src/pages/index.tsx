@@ -6,6 +6,7 @@ import { Heading, Link } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import TetrisGrid from 'src/components/TetrisGrid'
 import Player from 'src/components/Player'
+import NextPreview from 'src/components/NextPreview'
 
 const Home: NextPage = () => {
   return (
@@ -25,6 +26,7 @@ const Home: NextPage = () => {
         </div>
         <TetrisGrid />
         <Player />
+        <NextPreview />
       </main>
     </div>
   )

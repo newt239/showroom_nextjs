@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { decideTetrominoType } from "src/libs/commonFunction";
 import { tetromino } from "src/libs/tetromino";
 
 type currentStateType = {
@@ -7,17 +8,18 @@ type currentStateType = {
   x: number;
   y: number;
 }
+const firstTetrominoType = decideTetrominoType();
 export const currentState = atom<currentStateType>({
   key: "atom.current",
   default: {
-    type: 2,
-    state: tetromino[2],
+    type: firstTetrominoType,
+    state: tetromino[firstTetrominoType],
     x: 0,
     y: 0
   },
 });
 
-export const nextState = atom({
+export const nextState = atom<number>({
   key: "atom.next",
-  default: 0,
+  default: decideTetrominoType(),
 });

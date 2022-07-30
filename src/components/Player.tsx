@@ -1,12 +1,14 @@
 import type { NextPage } from 'next'
 import { useRecoilState } from 'recoil'
-import { currentState } from 'src/store/game'
+import { currentState, nextState } from 'src/store/game'
 import { boardState } from 'src/store/board'
 import { Button } from '@chakra-ui/react'
 import { tetromino } from 'src/libs/tetromino'
+import { decideTetrominoType } from 'src/libs/commonFunction'
 
 const Player: NextPage = () => {
   const [current, setCurrent] = useRecoilState(currentState);
+  const [next, setNext] = useRecoilState(nextState);
   const [board, setBoard] = useRecoilState(boardState);
 
   const blockDown = () => {
@@ -45,8 +47,8 @@ const Player: NextPage = () => {
     });
     setBoard(newBoard);
     deleteLine(newBoard);
-    const newType = Math.floor(Math.random() * (5 - 1)) + 1;
-    setCurrent({ type: newType, state: tetromino[newType], x: 0, y: 0 })
+    setCurrent({ type: next, state: tetromino[next], x: 0, y: 0 });
+    setNext(decideTetrominoType());
   }
 
   const rotate = () => {
@@ -96,7 +98,6 @@ const Player: NextPage = () => {
         lines.push(i);
       }
     });
-    console.log(lines);
     let newBoard: number[][] = [];
     for (const line of lines) {
       newBoard.push(currentBoard[line]);

@@ -1,8 +1,5 @@
-import { atom, selector } from "recoil";
-
-const generate2DArray1 = (y: number, x: number, val = 0) => {
-  return Array.from(new Array(y), _ => new Array(x).fill(val));
-};
+import { atom } from "recoil";
+import { generate2DArray1 } from "src/libs/commonFunction";
 
 export const boardState = atom<number[][]>({
   key: "atom.board",

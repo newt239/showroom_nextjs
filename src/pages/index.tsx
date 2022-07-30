@@ -4,6 +4,8 @@ import styles from 'src/styles/Home.module.scss'
 
 import { Heading, Link } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
+import TetrisGrid from 'src/components/TetrisGrid'
+import Player from 'src/components/Player'
 
 const Home: NextPage = () => {
   return (
@@ -21,6 +23,8 @@ const Home: NextPage = () => {
             Documentation <ExternalLinkIcon mx='2px' />
           </Link>
         </div>
+        <TetrisGrid />
+        <Player />
       </main>
     </div>
   )

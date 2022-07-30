@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { tetromino } from "src/libs/tetromino";
 
 type currentStateType = {
   type: number;
@@ -10,7 +11,7 @@ export const currentState = atom<currentStateType>({
   key: "atom.current",
   default: {
     type: 2,
-    state: [],
+    state: tetromino[2],
     x: 0,
     y: 0
   },

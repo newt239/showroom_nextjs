@@ -32,7 +32,7 @@ const Player: NextPage = () => {
   }
 
   const touchBottom = () => {
-    setBoard(board.map((row, i) => {
+    const newBoard = board.map((row, i) => {
       return row.map((cell, j) => {
         if (cell !== 0) {
           return cell
@@ -42,9 +42,10 @@ const Player: NextPage = () => {
           return 0
         }
       })
-    }));
+    });
+    setBoard(newBoard);
+    deleteLine(newBoard);
     const newType = Math.floor(Math.random() * (5 - 1)) + 1;
-    console.log()
     setCurrent({ type: newType, state: tetromino[newType], x: 0, y: 0 })
   }
 
@@ -86,6 +87,24 @@ const Player: NextPage = () => {
       }
     }
     return true;
+  }
+
+  const deleteLine = (currentBoard: number[][]) => {
+    let lines: number[] = [];
+    currentBoard.map((row, i) => {
+      if (Math.min(...row) === 0) {
+        lines.push(i);
+      }
+    });
+    console.log(lines);
+    let newBoard: number[][] = [];
+    for (const line of lines) {
+      newBoard.push(currentBoard[line]);
+    }
+    for (let i = 0; i < 20 - lines.length; i++) {
+      newBoard.unshift(new Array<number>(10).fill(0));
+    }
+    setBoard(newBoard);
   }
 
   return (

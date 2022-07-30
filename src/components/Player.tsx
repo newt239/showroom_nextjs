@@ -5,44 +5,61 @@ import { boardState } from 'src/store/board'
 import { Button } from '@chakra-ui/react'
 import { tetromino } from 'src/libs/tetromino'
 
-
 const Player: NextPage = () => {
   const [current, setCurrent] = useRecoilState(currentState);
   const [board, setBoard] = useRecoilState(boardState);
 
   const blockDown = () => {
     const newY = current.y + 1;
-    if (canMove(tetromino[current.type], current.x, newY)) {
+    if (canMove(current.state, current.x, newY)) {
       setCurrent({ ...current, y: newY });
-      if (!canMove(tetromino[current.type], current.x, newY + 1)) {
-        checkNext();
+      if (!canMove(current.state, current.x, newY + 1)) {
+        touchBottom();
       }
     }
   }
 
   const blockLeft = () => {
-    if (canMove(tetromino[current.type], current.x - 1, current.y)) {
+    if (canMove(current.state, current.x - 1, current.y)) {
       setCurrent({ ...current, x: current.x - 1 });
     }
   }
 
   const blockRight = () => {
-    if (canMove(tetromino[current.type], current.x + 1, current.y)) {
+    if (canMove(current.state, current.x + 1, current.y)) {
       setCurrent({ ...current, x: current.x + 1 });
     }
   }
 
-  const checkNext = () => {
+  const touchBottom = () => {
     setBoard(board.map((row, i) => {
       return row.map((cell, j) => {
-        if (current.y < i && current.x <= j && i - current.y < 5 && j - current.x < 5) {
-          return tetromino[current.type][i - current.y - 1][j - current.x]
-        } else {
+        if (cell !== 0) {
           return cell
+        } else if (current.y < i && current.x <= j && i - current.y < 5 && j - current.x < 5) {
+          return current.state[i - current.y - 1][j - current.x]
+        } else {
+          return 0
         }
       })
     }));
-    setCurrent({ type: 1, x: 0, y: 0 })
+    const newType = Math.floor(Math.random() * (5 - 1)) + 1;
+    console.log()
+    setCurrent({ type: newType, state: tetromino[newType], x: 0, y: 0 })
+  }
+
+  const rotate = () => {
+    if (current.type === 2) {
+      return;
+    }
+    let block = current.state.map((row, i) => {
+      return row.map((cell, j) => {
+        return current.state[4 - j][i]
+      })
+    });
+    if (canMove(block, current.x, current.y)) {
+      setCurrent({ ...current, state: block });
+    }
   }
 
   const canMove = (block: number[][], x: number, y: number) => {
@@ -76,6 +93,7 @@ const Player: NextPage = () => {
       <Button onClick={blockDown}>down</Button>
       <Button onClick={blockLeft}>left</Button>
       <Button onClick={blockRight}>right</Button>
+      <Button onClick={rotate}>rotate</Button>
     </>
   )
 }

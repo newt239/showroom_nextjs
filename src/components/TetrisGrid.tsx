@@ -3,7 +3,6 @@ import { useRecoilValue } from 'recoil'
 import { boardState } from 'src/store/board'
 import { Box, Flex } from '@chakra-ui/react';
 import { currentState } from 'src/store/game';
-import { tetromino } from 'src/libs/tetromino'
 
 const TetrisGrid: NextPage = () => {
   const board = useRecoilValue(boardState);
@@ -14,13 +13,23 @@ const TetrisGrid: NextPage = () => {
         return (
           <Flex key={i}>
             {row.map((cell, j) => {
-              if (current.y <= i && current.x <= j && i - current.y < 5 && j - current.x < 5) {
+              if (cell !== 0) {
                 return (
                   <Box key={`${i}-${j}`} style={{
                     width: 20,
                     height: 20,
                     border: "1px solid black",
-                    backgroundColor: tetromino[current.type][i - current.y][j - current.x] !== 0 ? "black" : "white"
+                    backgroundColor: "black"
+                  }}>
+                  </Box>
+                )
+              } else if (current.y <= i && current.x <= j && i - current.y < 5 && j - current.x < 5) {
+                return (
+                  <Box key={`${i}-${j}`} style={{
+                    width: 20,
+                    height: 20,
+                    border: "1px solid black",
+                    backgroundColor: current.state[i - current.y][j - current.x] !== 0 ? "black" : "white"
                   }}>
                   </Box>
                 )
@@ -30,7 +39,7 @@ const TetrisGrid: NextPage = () => {
                     width: 20,
                     height: 20,
                     border: "1px solid black",
-                    backgroundColor: cell !== 0 ? "black" : "white"
+                    backgroundColor: "white"
                   }}>
                   </Box>
                 )

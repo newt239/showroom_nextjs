@@ -15,7 +15,7 @@ export const currentState = atom<currentStateType>({
     type: firstTetrominoType,
     state: tetromino[firstTetrominoType],
     x: 0,
-    y: 0
+    y: firstTetrominoType === 1 ? 0 : -1
   },
 });
 

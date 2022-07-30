@@ -5,13 +5,14 @@ import { boardState } from 'src/store/board'
 import { Button } from '@chakra-ui/react'
 import { tetromino } from 'src/libs/tetromino'
 import { decideTetrominoType } from 'src/libs/commonFunction'
+import { ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon, ArrowUpIcon, RepeatIcon } from '@chakra-ui/icons'
 
 const Player: NextPage = () => {
   const [current, setCurrent] = useRecoilState(currentState);
   const [next, setNext] = useRecoilState(nextState);
   const [board, setBoard] = useRecoilState(boardState);
 
-  const blockDown = () => {
+  const blockDown = async () => {
     const newY = current.y + 1;
     if (canMove(current.state, current.x, newY)) {
       setCurrent({ ...current, y: newY });
@@ -47,7 +48,7 @@ const Player: NextPage = () => {
     });
     setBoard(newBoard);
     deleteLine(newBoard);
-    setCurrent({ type: next, state: tetromino[next], x: 0, y: 0 });
+    setCurrent({ type: next, state: tetromino[next], x: 0, y: next === 1 ? 0 : -1 });
     setNext(decideTetrominoType());
   }
 
@@ -110,10 +111,10 @@ const Player: NextPage = () => {
 
   return (
     <>
-      <Button onClick={blockDown}>down</Button>
-      <Button onClick={blockLeft}>left</Button>
-      <Button onClick={blockRight}>right</Button>
-      <Button onClick={rotate}>rotate</Button>
+      <Button onClick={blockDown} colorScheme="blue"><ArrowDownIcon /></Button>
+      <Button onClick={blockLeft} colorScheme="blue"><ArrowBackIcon /></Button>
+      <Button onClick={blockRight} colorScheme="blue"><ArrowForwardIcon /></Button>
+      <Button onClick={rotate} colorScheme="blue"><RepeatIcon /></Button>
     </>
   )
 }

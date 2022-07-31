@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { Button } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon, ArrowUpIcon, RepeatIcon } from '@chakra-ui/icons'
-import { useContext, useEffect } from 'react'
+import { useCallback, useContext, useEffect } from 'react'
 import { GlobalContext } from 'src/pages/_app'
 
 const Player: NextPage = () => {

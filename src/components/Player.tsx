@@ -110,13 +110,13 @@ const Player: NextPage = () => {
 
   return (
     <>
-      <Button onClick={downBottom} colorScheme="blue"><ArrowUpIcon /></Button>
-      <Button onClick={blockDown} colorScheme="blue"><ArrowDownIcon /></Button>
-      <Button onClick={blockLeft} colorScheme="blue"><ArrowBackIcon /></Button>
-      <Button onClick={blockRight} colorScheme="blue"><ArrowForwardIcon /></Button>
-      <Button onClick={rotate} colorScheme="blue"><RepeatIcon /></Button>
-      <Button onClick={startGame} colorScheme="blue">start</Button>
-      <Button onClick={resetGame} colorScheme="blue">reset</Button>
+      <Button onClick={downBottom} colorScheme="blue" disabled={!game.start || game.end}><ArrowUpIcon /></Button>
+      <Button onClick={blockDown} colorScheme="blue" disabled={!game.start || game.end}><ArrowDownIcon /></Button>
+      <Button onClick={blockLeft} colorScheme="blue" disabled={!game.start || game.end}><ArrowBackIcon /></Button>
+      <Button onClick={blockRight} colorScheme="blue" disabled={!game.start || game.end}><ArrowForwardIcon /></Button>
+      <Button onClick={rotate} colorScheme="blue" disabled={!game.start || game.end}><RepeatIcon /></Button>
+      <Button onClick={startGame} colorScheme="blue" disabled={game.start}>start</Button>
+      <Button onClick={resetGame} colorScheme="blue" disabled={game.start && game.end}>reset</Button>
     </>
   )
 }

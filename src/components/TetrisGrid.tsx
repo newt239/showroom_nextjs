@@ -17,8 +17,6 @@ const TetrisGrid: NextPage = () => {
         return theme.colors.red[500]
       case 5:
         return theme.colors.yellow[500]
-      case 0:
-        return "white"
     }
     if (game.current.y <= i && game.current.x <= j && i - game.current.y < 5 && j - game.current.x < 5) {
       const tetrominoCell = game.current.state[i - game.current.y][j - game.current.x]

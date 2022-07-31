@@ -22,7 +22,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <Heading as='h1'>Welcome to Next TETRIS!</Heading>
-        {game.start && (
+        {game.start && !game.end && (
           <Alert status='info'>
             <AlertIcon />
             start!

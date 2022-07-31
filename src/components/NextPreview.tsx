@@ -10,7 +10,7 @@ const NextPreview: NextPage = () => {
 
   return (
     <Box suppressHydrationWarning>
-      {tetromino[game.next].map((row, i) => {
+      {tetromino[game.current.next].map((row, i) => {
         return (
           <Flex key={i}>
             {row.map((cell, j) => {

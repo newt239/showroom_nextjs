@@ -1,19 +1,16 @@
 import type { NextPage } from 'next'
-import { useRecoilValue } from 'recoil'
-import { boardState } from 'src/store/board'
-import { currentState } from 'src/store/game';
 import { Box, Flex } from '@chakra-ui/react';
+import { useContext } from 'react';
+import { GlobalContext } from 'src/pages/_app';
 
 const TetrisGrid: NextPage = () => {
-  const board = useRecoilValue(boardState);
-  const current = useRecoilValue(currentState);
-
+  const { board, game } = useContext(GlobalContext);
   const decideColor = (cell: number, i: number, j: number) => {
     if (cell !== 0) {
       return "black"
     }
-    if (current.y <= i && current.x <= j && i - current.y < 5 && j - current.x < 5) {
-      if (current.state[i - current.y][j - current.x] !== 0) {
+    if (game.y <= i && game.x <= j && i - game.y < 5 && j - game.x < 5) {
+      if (game.state[i - game.y][j - game.x] !== 0) {
         return "black"
       }
     }

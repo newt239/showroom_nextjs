@@ -1,7 +1,9 @@
-import { atom } from "recoil";
+import { useReducer } from "react";
 import { generate2DArray1 } from "src/libs/commonFunction";
 
-export const boardState = atom<number[][]>({
-  key: "atom.board",
-  default: generate2DArray1(20, 10),
-});
+export const useBoardState = () => {
+  const reducer = (state: number[][], action: number[][]) => {
+    return action
+  }
+  return useReducer(reducer, generate2DArray1(20, 10));
+}

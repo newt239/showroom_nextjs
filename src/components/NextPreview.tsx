@@ -1,16 +1,16 @@
 import type { NextPage } from 'next'
-import { useRecoilValue } from 'recoil'
-import { nextState } from 'src/store/game';
 
 import { Box, Flex } from '@chakra-ui/react';
 import { tetromino } from 'src/libs/tetromino';
+import { useContext } from 'react';
+import { GlobalContext } from 'src/pages/_app';
 
 const NextPreview: NextPage = () => {
-  const next = useRecoilValue(nextState);
+  const { game } = useContext(GlobalContext);
 
   return (
     <Box suppressHydrationWarning>
-      {tetromino[next].map((row, i) => {
+      {tetromino[game.next].map((row, i) => {
         return (
           <Flex key={i}>
             {row.map((cell, j) => {

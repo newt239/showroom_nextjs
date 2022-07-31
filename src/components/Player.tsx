@@ -1,36 +1,38 @@
 import type { NextPage } from 'next'
-import { useRecoilState } from 'recoil'
-import { currentState, nextState } from 'src/store/game'
-import { boardState } from 'src/store/board'
 import { Button } from '@chakra-ui/react'
 import { tetromino } from 'src/libs/tetromino'
 import { decideTetrominoType } from 'src/libs/commonFunction'
 import { ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon, ArrowUpIcon, RepeatIcon } from '@chakra-ui/icons'
+import { useContext } from 'react'
+import { GlobalContext } from 'src/pages/_app'
 
 const Player: NextPage = () => {
-  const [current, setCurrent] = useRecoilState(currentState);
-  const [next, setNext] = useRecoilState(nextState);
-  const [board, setBoard] = useRecoilState(boardState);
+  const { board, setBoard, game, setGame } = useContext(GlobalContext);
 
-  const blockDown = async () => {
-    const newY = current.y + 1;
-    if (canMove(current.state, current.x, newY)) {
-      setCurrent({ ...current, y: newY });
-      if (!canMove(current.state, current.x, newY + 1)) {
+  const blockDown = () => {
+    const newY = game.y + 1;
+    console.log(game.state, game.x, newY);
+    if (canMove(game.state, game.x, newY)) {
+      setGame({ ...game, y: newY });
+      console.log(game.state, game.x, newY + 1);
+      if (!canMove(game.state, game.x, newY + 1)) {
         touchBottom();
+      } else {
+        return true;
       }
     }
+    return false;
   }
 
   const blockLeft = () => {
-    if (canMove(current.state, current.x - 1, current.y)) {
-      setCurrent({ ...current, x: current.x - 1 });
+    if (canMove(game.state, game.x - 1, game.y)) {
+      setGame({ ...game, x: game.x - 1 });
     }
   }
 
   const blockRight = () => {
-    if (canMove(current.state, current.x + 1, current.y)) {
-      setCurrent({ ...current, x: current.x + 1 });
+    if (canMove(game.state, game.x + 1, game.y)) {
+      setGame({ ...game, x: game.x + 1 });
     }
   }
 
@@ -39,30 +41,28 @@ const Player: NextPage = () => {
       return row.map((cell, j) => {
         if (cell !== 0) {
           return cell
-        } else if (current.y < i && current.x <= j && i - current.y < 5 && j - current.x < 5) {
-          return current.state[i - current.y - 1][j - current.x]
+        } else if (game.y < i && game.x <= j && i - game.y < 5 && j - game.x < 5) {
+          return game.state[i - game.y - 1][j - game.x]
         } else {
           return 0
         }
       })
     });
-    setBoard(newBoard);
     deleteLine(newBoard);
-    setCurrent({ type: next, state: tetromino[next], x: 0, y: next === 1 ? 0 : -1 });
-    setNext(decideTetrominoType());
+    setGame({ type: game.next, state: tetromino[game.next], x: 0, y: game.next === 1 ? 0 : -1, next: decideTetrominoType() });
   }
 
   const rotate = () => {
-    if (current.type === 2) {
+    if (game.type === 2) {
       return;
     }
-    let block = current.state.map((row, i) => {
+    let block = game.state.map((row, i) => {
       return row.map((cell, j) => {
-        return current.state[4 - j][i]
+        return game.state[4 - j][i]
       })
     });
-    if (canMove(block, current.x, current.y)) {
-      setCurrent({ ...current, state: block });
+    if (canMove(block, game.x, game.y)) {
+      setGame({ ...game, state: block });
     }
   }
 
@@ -92,16 +92,16 @@ const Player: NextPage = () => {
     return true;
   }
 
-  const deleteLine = (currentBoard: number[][]) => {
+  const deleteLine = (gameBoard: number[][]) => {
     let lines: number[] = [];
-    currentBoard.map((row, i) => {
+    gameBoard.map((row, i) => {
       if (Math.min(...row) === 0) {
         lines.push(i);
       }
     });
     let newBoard: number[][] = [];
     for (const line of lines) {
-      newBoard.push(currentBoard[line]);
+      newBoard.push(gameBoard[line]);
     }
     for (let i = 0; i < 20 - lines.length; i++) {
       newBoard.unshift(new Array<number>(10).fill(0));

@@ -100,7 +100,6 @@ export const useGameState = () => {
       for (let h = 0; h < 5; h++) {
         for (let w = 0; w < 5; w++) {
           if (tetromino[state.current.next][h][w] > 0 && newBoard[h][w] > 0) {
-            console.log(newBoard)
             flag = true;
           }
         }

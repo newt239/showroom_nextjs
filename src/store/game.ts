@@ -3,6 +3,9 @@ import { decideTetrominoType, generate2DArray1 } from "src/libs/commonFunction";
 import { tetromino } from "src/libs/tetromino";
 
 export type GameStateType = {
+  start: boolean;
+  end: boolean;
+  score: number;
   current: {
     type: number;
     state: number[][];
@@ -19,6 +22,9 @@ export type ActionType = {
 export const useGameState = () => {
   // typeとnextの初期値をランダムにすると2回呼び出されているため2回目のクリックで表示が変わってしまう
   const initialValue = {
+    start: false,
+    end: false,
+    score: 0,
     current: {
       type: 1,
       state: tetromino[1],
@@ -50,10 +56,15 @@ export const useGameState = () => {
     ]
   }
   const reducer = (state: GameStateType, action: ActionType) => {
+    if (typeof action.payload === "undefined") {
+      if (action.type === "start") {
+        return { ...state, start: true, end: false }
+      }
+    }
     if (typeof action.payload === "number") {
       if (action.type === "x") {
         return { ...state, current: { ...state.current, x: state.current.x + action.payload } }
-      } else {
+      } else if (action.type === "y") {
         return { ...state, current: { ...state.current, y: state.current.y + action.payload } }
       }
     } else if (action.type === "state" && typeof action.payload !== "undefined") {
@@ -83,7 +94,16 @@ export const useGameState = () => {
       for (let i = 0; i < 20 - lines.length; i++) {
         newBoard.unshift(new Array<number>(10).fill(0));
       }
-      return { current: { type: state.current.next, state: tetromino[state.current.next], x: 0, y: state.current.next === 1 ? 0 : -1, next: decideTetrominoType() }, board: newBoard }
+      let flag = false;
+      for (let h = 0; h < 5; h++) {
+        for (let w = 0; w < 5; w++) {
+          if (tetromino[state.current.next][h][w] > 0 && newBoard[h][w] > 0) {
+            console.log(newBoard)
+            flag = true;
+          }
+        }
+      }
+      return { ...state, end: flag ? true : false, current: { type: state.current.next, state: tetromino[state.current.next], x: 0, y: state.current.next === 1 ? 0 : -1, next: decideTetrominoType() }, board: newBoard }
     }
     return state
   }

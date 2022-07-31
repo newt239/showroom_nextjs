@@ -8,57 +8,69 @@ const Player: NextPage = () => {
   const { game, gameDispatch } = useContext(GlobalContext);
 
   const blockDown = () => {
-    const newY = game.current.y + 1;
-    if (canMove(game.current.state, game.current.x, newY)) {
-      gameDispatch({ type: "y", payload: 1 });
-      if (!canMove(game.current.state, game.current.x, newY + 1)) {
-        gameDispatch({ type: "reset" });
+    if (game.start && !game.end) {
+      const newY = game.current.y + 1;
+      if (canMove(game.current.state, game.current.x, newY)) {
+        gameDispatch({ type: "y", payload: 1 });
+        if (!canMove(game.current.state, game.current.x, newY + 1)) {
+          gameDispatch({ type: "reset" });
+        }
       }
     }
   }
 
   // 1秒おきに1マスずつ自動で落下
   useEffect(() => {
-    const intervalId = setInterval(() => blockDown(), 1000)
-    return () => clearInterval(intervalId);
+    if (game.start && !game.end) {
+      const intervalId = setInterval(() => blockDown(), 1000)
+      return () => clearInterval(intervalId);
+    }
   }, []);
 
   const downBottom = () => {
-    let c = 1;
-    while (true) {
-      if (canMove(game.current.state, game.current.x, game.current.y + c)) {
-        c++;
-      } else {
-        gameDispatch({ type: "y", payload: c - 1 });
-        gameDispatch({ type: "reset" });
-        break;
+    if (game.start && !game.end) {
+      let c = 1;
+      while (true) {
+        if (canMove(game.current.state, game.current.x, game.current.y + c)) {
+          c++;
+        } else {
+          gameDispatch({ type: "y", payload: c - 1 });
+          gameDispatch({ type: "reset" });
+          break;
+        }
       }
     }
   }
 
   const blockLeft = () => {
-    if (canMove(game.current.state, game.current.x - 1, game.current.y)) {
-      gameDispatch({ type: "x", payload: -1 });
+    if (game.start && !game.end) {
+      if (canMove(game.current.state, game.current.x - 1, game.current.y)) {
+        gameDispatch({ type: "x", payload: -1 });
+      }
     }
   }
 
   const blockRight = () => {
-    if (canMove(game.current.state, game.current.x + 1, game.current.y)) {
-      gameDispatch({ type: "x", payload: 1 });
+    if (game.start && !game.end) {
+      if (canMove(game.current.state, game.current.x + 1, game.current.y)) {
+        gameDispatch({ type: "x", payload: 1 });
+      }
     }
   }
 
   const rotate = () => {
-    if (game.current.type === 2) {
-      return;
-    }
-    let block = game.current.state.map((row, i) => {
-      return row.map((cell, j) => {
-        return game.current.state[4 - j][i]
-      })
-    });
-    if (canMove(block, game.current.x, game.current.y)) {
-      gameDispatch({ type: "state", payload: block });
+    if (game.start && !game.end) {
+      if (game.current.type === 2) {
+        return;
+      }
+      let block = game.current.state.map((row, i) => {
+        return row.map((cell, j) => {
+          return game.current.state[4 - j][i]
+        })
+      });
+      if (canMove(block, game.current.x, game.current.y)) {
+        gameDispatch({ type: "state", payload: block });
+      }
     }
   }
 
@@ -88,6 +100,10 @@ const Player: NextPage = () => {
     return true;
   }
 
+  const startGame = () => {
+    gameDispatch({ type: "start" })
+  }
+
   return (
     <>
       <Button onClick={downBottom} colorScheme="blue"><ArrowUpIcon /></Button>
@@ -95,6 +111,7 @@ const Player: NextPage = () => {
       <Button onClick={blockLeft} colorScheme="blue"><ArrowBackIcon /></Button>
       <Button onClick={blockRight} colorScheme="blue"><ArrowForwardIcon /></Button>
       <Button onClick={rotate} colorScheme="blue"><RepeatIcon /></Button>
+      <Button onClick={startGame} colorScheme="blue">start</Button>
     </>
   )
 }

@@ -13,11 +13,8 @@ const Player: NextPage = () => {
       gameDispatch({ type: "y", payload: 1 });
       if (!canMove(game.current.state, game.current.x, newY + 1)) {
         gameDispatch({ type: "reset" });
-      } else {
-        return true;
       }
     }
-    return false;
   }
 
   const downBottom = () => {
@@ -44,6 +41,7 @@ const Player: NextPage = () => {
       gameDispatch({ type: "x", payload: 1 });
     }
   }
+
   const rotate = () => {
     if (game.current.type === 2) {
       return;

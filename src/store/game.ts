@@ -57,7 +57,7 @@ export const useGameState = () => {
         return { ...state, current: { ...state.current, y: state.current.y + action.payload } }
       }
     } else if (action.type === "state" && typeof action.payload !== "undefined") {
-      return { ...state, state: action.payload }
+      return { ...state, current: { ...state.current, state: action.payload } }
     } else if (action.type === "reset") {
       const savedBoard = state.board.map((row, i) => {
         return row.map((cell, j) => {

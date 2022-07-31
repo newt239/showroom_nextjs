@@ -22,6 +22,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <Heading as='h1'>Welcome to Next TETRIS!</Heading>
+        <p>score:{game.score}</p>
         {game.start && !game.end && (
           <Alert status='info'>
             <AlertIcon />

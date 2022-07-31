@@ -93,8 +93,10 @@ export const useGameState = () => {
       for (const line of lines) {
         newBoard.push(savedBoard[line]);
       }
+      let score = 0;
       for (let i = 0; i < 20 - lines.length; i++) {
         newBoard.unshift(new Array<number>(10).fill(0));
+        score++;
       }
       let flag = false;
       for (let h = 0; h < 5; h++) {
@@ -104,7 +106,7 @@ export const useGameState = () => {
           }
         }
       }
-      return { ...state, end: flag ? true : false, current: { type: state.current.next, state: tetromino[state.current.next], x: 0, y: state.current.next === 1 ? 0 : -1, next: decideTetrominoType() }, board: newBoard }
+      return { ...state, end: flag ? true : false, score: state.score + score, current: { type: state.current.next, state: tetromino[state.current.next], x: 0, y: state.current.next === 1 ? 0 : -1, next: decideTetrominoType() }, board: newBoard }
     }
     return state
   }

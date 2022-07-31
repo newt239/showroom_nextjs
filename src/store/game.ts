@@ -59,6 +59,8 @@ export const useGameState = () => {
     if (typeof action.payload === "undefined") {
       if (action.type === "start") {
         return { ...state, start: true, end: false }
+      } else if (action.type === "game-reset") {
+        return initialValue
       }
     }
     if (typeof action.payload === "number") {

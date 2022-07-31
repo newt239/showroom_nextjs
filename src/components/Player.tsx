@@ -104,6 +104,10 @@ const Player: NextPage = () => {
     gameDispatch({ type: "start" })
   }
 
+  const resetGame = () => {
+    gameDispatch({ type: "game-reset" })
+  }
+
   return (
     <>
       <Button onClick={downBottom} colorScheme="blue"><ArrowUpIcon /></Button>
@@ -112,6 +116,7 @@ const Player: NextPage = () => {
       <Button onClick={blockRight} colorScheme="blue"><ArrowForwardIcon /></Button>
       <Button onClick={rotate} colorScheme="blue"><RepeatIcon /></Button>
       <Button onClick={startGame} colorScheme="blue">start</Button>
+      <Button onClick={resetGame} colorScheme="blue">reset</Button>
     </>
   )
 }

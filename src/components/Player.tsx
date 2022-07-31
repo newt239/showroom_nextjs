@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { Button } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon, ArrowUpIcon, RepeatIcon } from '@chakra-ui/icons'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { GlobalContext } from 'src/pages/_app'
 
 const Player: NextPage = () => {
@@ -16,6 +16,12 @@ const Player: NextPage = () => {
       }
     }
   }
+
+  // 1秒おきに1マスずつ自動で落下
+  useEffect(() => {
+    const intervalId = setInterval(() => blockDown(), 1000)
+    return () => clearInterval(intervalId);
+  }, []);
 
   const downBottom = () => {
     let c = 1;

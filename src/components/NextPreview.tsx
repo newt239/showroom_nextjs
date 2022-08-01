@@ -19,8 +19,8 @@ const NextPreview: NextPage = () => {
             {row.map((cell, j) => {
               return (
                 <Box suppressHydrationWarning key={`${i}-${j}`} style={{
-                  width: 20,
-                  height: 20,
+                  width: 18,
+                  height: 18,
                   border: "1px solid black",
                   backgroundColor: decideColor(cell)
                 }}></Box>

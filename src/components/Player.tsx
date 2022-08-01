@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Button } from '@chakra-ui/react'
+import { Box, Button, Flex } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon, ArrowUpIcon, RepeatIcon } from '@chakra-ui/icons'
 import { useCallback, useContext, useEffect } from 'react'
 import { GlobalContext } from 'src/pages/_app'
@@ -109,15 +109,15 @@ const Player: NextPage = () => {
   }
 
   return (
-    <>
-      <Button onClick={downBottom} colorScheme="blue" disabled={!game.start || game.end}><ArrowUpIcon /></Button>
-      <Button onClick={blockDown} colorScheme="blue" disabled={!game.start || game.end}><ArrowDownIcon /></Button>
-      <Button onClick={blockLeft} colorScheme="blue" disabled={!game.start || game.end}><ArrowBackIcon /></Button>
-      <Button onClick={blockRight} colorScheme="blue" disabled={!game.start || game.end}><ArrowForwardIcon /></Button>
-      <Button onClick={rotate} colorScheme="blue" disabled={!game.start || game.end}><RepeatIcon /></Button>
+    <Flex style={{ flexDirection: "column", gap: ".5rem" }}>
+      <Button onClick={downBottom} colorScheme="blue" size='sm' disabled={!game.start || game.end}><ArrowUpIcon /></Button>
+      <Button onClick={blockDown} colorScheme="blue" size='sm' disabled={!game.start || game.end}><ArrowDownIcon /></Button>
+      <Button onClick={blockLeft} colorScheme="blue" size='sm' disabled={!game.start || game.end}><ArrowBackIcon /></Button>
+      <Button onClick={blockRight} colorScheme="blue" size='sm' disabled={!game.start || game.end}><ArrowForwardIcon /></Button>
+      <Button onClick={rotate} colorScheme="blue" size='sm' disabled={!game.start || game.end}><RepeatIcon /></Button>
       <Button onClick={startGame} colorScheme="blue" disabled={game.start}>start</Button>
-      <Button onClick={resetGame} colorScheme="blue" disabled={!game.start || !game.end}>reset</Button>
-    </>
+      <Button onClick={resetGame} colorScheme="red" disabled={!game.start || !game.end}>reset</Button>
+    </Flex>
   )
 }
 

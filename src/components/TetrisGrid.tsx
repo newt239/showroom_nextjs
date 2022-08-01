@@ -23,8 +23,8 @@ const TetrisGrid: NextPage = () => {
           <Flex key={i}>
             {row.map((cell, j) => {
               return (<Box suppressHydrationWarning key={`${i}-${j}`} style={{
-                width: 20,
-                height: 20,
+                width: 25,
+                height: 25,
                 border: "1px solid black",
                 backgroundColor: decideColor(cell, i, j)
               }}>

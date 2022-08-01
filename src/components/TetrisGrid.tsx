@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
-import { Box, color, Flex, theme } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { GlobalContext } from 'src/pages/_app';
-import { tetromino, tetrominoColors } from 'src/libs/tetromino';
+import { tetrominoColors } from 'src/libs/tetromino';
 
 const TetrisGrid: NextPage = () => {
   const { game } = useContext(GlobalContext);

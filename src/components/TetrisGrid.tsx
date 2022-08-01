@@ -2,38 +2,17 @@ import type { NextPage } from 'next'
 import { Box, color, Flex, theme } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { GlobalContext } from 'src/pages/_app';
+import { tetromino, tetrominoColors } from 'src/libs/tetromino';
 
 const TetrisGrid: NextPage = () => {
   const { game } = useContext(GlobalContext);
   const decideColor = (cell: number, i: number, j: number) => {
-    switch (cell) {
-      case 1:
-        return theme.colors.blue[500]
-      case 2:
-        return theme.colors.green[500]
-      case 3:
-        return theme.colors.purple[500]
-      case 4:
-        return theme.colors.red[500]
-      case 5:
-        return theme.colors.yellow[500]
+    if (cell !== 0) {
+      return tetrominoColors[cell]
     }
     if (game.current.y <= i && game.current.x <= j && i - game.current.y < 5 && j - game.current.x < 5) {
       const tetrominoCell = game.current.state[i - game.current.y][j - game.current.x]
-      switch (tetrominoCell) {
-        case 1:
-          return theme.colors.blue[500]
-        case 2:
-          return theme.colors.green[500]
-        case 3:
-          return theme.colors.purple[500]
-        case 4:
-          return theme.colors.red[500]
-        case 5:
-          return theme.colors.yellow[500]
-        case 0:
-          return "white"
-      }
+      return tetrominoColors[tetrominoCell]
     }
     return "white"
   }

@@ -1,7 +1,7 @@
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
-import { Context, createContext, Dispatch, DispatchWithoutAction } from 'react';
+import { Context, createContext, Dispatch } from 'react';
 import { GameStateType, ActionType, useGameState } from 'src/store/game';
 
 // https://zenn.dev/nfunato/articles/typing-ccontext-arg

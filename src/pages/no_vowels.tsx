@@ -2,8 +2,8 @@ import { ChangeEvent, useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import { Box, Button, Container, Heading, Input, Text } from '@chakra-ui/react'
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
+import { Box, Button, Container, Heading, IconButton, Input, InputGroup, InputRightElement, Text } from '@chakra-ui/react'
+import { ChevronDownIcon, ChevronUpIcon, SmallCloseIcon } from '@chakra-ui/icons'
 
 const NoVowels: NextPage = () => {
   const [text, setText] = useState("");
@@ -22,19 +22,23 @@ const NoVowels: NextPage = () => {
       <Container sx={{ py: "3rem" }}>
         <Heading as="h2" sx={{ textAlign: "center" }}>No Vowels</Heading>
         {!hide && (
-          <Input
-            placeholder='Type something...'
-            value={text}
-            onChange={handleChange}
-            sx={{ my: "1rem" }}
-          />
+          <InputGroup sx={{ my: "1rem", gap: ".5rem" }}>
+            <Input
+              placeholder='Type something...'
+              value={text}
+              onChange={handleChange}
+            />
+            <InputRightElement>
+              <IconButton aria-label="reset text" onClick={() => setText("")} icon={<SmallCloseIcon />} variant='ghost' />
+            </InputRightElement>
+          </InputGroup>
         )}
         <Box sx={{ width: "100%", textAlign: "center", my: "1rem" }}>
           <Button
             aria-label='hide input area'
             onClick={() => setHide(v => !v)}
             leftIcon={hide ? <ChevronDownIcon /> : <ChevronUpIcon />}>
-            {hide ? "show" : "hide"}
+            {hide ? "Show" : "Hide"}
           </Button>
         </Box>
         {text && (

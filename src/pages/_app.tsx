@@ -1,9 +1,12 @@
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
+import ReactGA from "react-ga4";
 import { Box, ChakraProvider, Container, Link } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  ReactGA.initialize("G-67RKL0JJXB");
+  ReactGA.send("pageview");
   return (
     <ChakraProvider>
       <>

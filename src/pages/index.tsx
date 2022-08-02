@@ -1,10 +1,12 @@
 import type { NextPage } from 'next'
 
-import { Box } from '@chakra-ui/react'
+import { Box, Link } from '@chakra-ui/react'
 
 const Home: NextPage = () => {
   return (
-    <Box></Box>
+    <Box>
+      <Link href="/tetris">Tetris</Link>
+    </Box>
   )
 }
 

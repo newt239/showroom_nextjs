@@ -4,7 +4,9 @@ import { Box } from '@chakra-ui/react'
 
 const NoVowels: NextPage = () => {
   return (
-    <Box></Box>
+    <Box>
+
+    </Box>
   )
 }
 

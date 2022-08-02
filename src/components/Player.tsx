@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
-import { Box, Button, Flex } from '@chakra-ui/react'
+import { Button, Flex } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon, ArrowUpIcon, RepeatIcon } from '@chakra-ui/icons'
-import { useCallback, useContext, useEffect } from 'react'
-import { GlobalContext } from 'src/pages/_app'
+import { useContext, useEffect } from 'react'
+import { GlobalContext } from 'src/pages/tetris'
 
 const Player: NextPage = () => {
   const { game, gameDispatch } = useContext(GlobalContext);

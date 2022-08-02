@@ -20,7 +20,6 @@ export let GlobalContext: Context<GameContextType>;
 const Tetris: NextPage = () => {
   const { game, gameDispatch } = useGameState();
   const value = { game, gameDispatch: gameDispatch }
-
   GlobalContext = createContext(value);
   return (
     <GlobalContext.Provider value={value}>

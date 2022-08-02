@@ -2,10 +2,12 @@ import { ChangeEvent, useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import { Box, Container, Heading, Input, Text } from '@chakra-ui/react'
+import { Box, Button, Container, Heading, Input, Text } from '@chakra-ui/react'
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 
 const NoVowels: NextPage = () => {
   const [text, setText] = useState("");
+  const [hide, setHide] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
@@ -19,12 +21,22 @@ const NoVowels: NextPage = () => {
       </Head>
       <Container sx={{ py: "3rem" }}>
         <Heading as="h2" sx={{ textAlign: "center" }}>No Vowels</Heading>
-        <Input
-          placeholder='Type something...'
-          value={text}
-          onChange={handleChange}
-          sx={{ my: "1rem" }}
-        />
+        {!hide && (
+          <Input
+            placeholder='Type something...'
+            value={text}
+            onChange={handleChange}
+            sx={{ my: "1rem" }}
+          />
+        )}
+        <Box sx={{ width: "100%", textAlign: "center", my: "1rem" }}>
+          <Button
+            aria-label='hide input area'
+            onClick={() => setHide(v => !v)}
+            leftIcon={hide ? <ChevronDownIcon /> : <ChevronUpIcon />}>
+            {hide ? "show" : "hide"}
+          </Button>
+        </Box>
         <Heading as="h3" size="lg" sx={{ textAlign: "center" }}>Result</Heading>
         {text && (
           <Box borderWidth={1} borderRadius="lg" sx={{ my: "1rem", p: "1rem" }}>

@@ -37,9 +37,9 @@ const NoVowels: NextPage = () => {
             {hide ? "show" : "hide"}
           </Button>
         </Box>
-        <Heading as="h3" size="lg" sx={{ textAlign: "center" }}>Result</Heading>
         {text && (
           <Box borderWidth={1} borderRadius="lg" sx={{ my: "1rem", p: "1rem" }}>
+            <Heading as="h3" size="lg" sx={{ textAlign: "center" }}>Result</Heading>
             <Text fontSize="xl" sx={{ letterSpacing: ".5rem" }}>
               {Array.from(text).map(s => {
                 if (['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'].includes(s)) {

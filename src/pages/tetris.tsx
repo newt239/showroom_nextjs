@@ -57,9 +57,6 @@ const Tetris: NextPage = () => {
               <Player />
             </Flex>
           </Flex>
-          <Link href="https://github.com/newt239/tetris-nextjs" isExternal sx={{ marginTop: "1rem" }}>
-            newt239/tetris-nextjs<ExternalLinkIcon mx={2} />
-          </Link>
         </main>
       </div >
     </GlobalContext.Provider>

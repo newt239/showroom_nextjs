@@ -3,8 +3,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from 'src/styles/Home.module.scss'
 
-import { Alert, AlertIcon, Flex, Heading, Link } from '@chakra-ui/react'
-import { ExternalLinkIcon } from '@chakra-ui/icons'
+import { Alert, AlertIcon, Flex, Heading } from '@chakra-ui/react'
 
 import TetrisGrid from 'src/components/TetrisGrid'
 import Player from 'src/components/Player'

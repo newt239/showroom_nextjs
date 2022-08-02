@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import { Box, Button, Container, Heading, IconButton, Input, InputGroup, InputRightElement, Text } from '@chakra-ui/react'
+import { Box, Button, Container, Heading, IconButton, Input, InputGroup, InputRightElement, SlideFade, Text } from '@chakra-ui/react'
 import { ChevronDownIcon, ChevronUpIcon, SmallCloseIcon } from '@chakra-ui/icons'
 
 const NoVowels: NextPage = () => {
@@ -21,7 +21,7 @@ const NoVowels: NextPage = () => {
       </Head>
       <Container sx={{ py: "3rem" }}>
         <Heading as="h2" sx={{ textAlign: "center" }}>No Vowels</Heading>
-        {!hide && (
+        <SlideFade in={!hide} offsetY="-1rem">
           <InputGroup sx={{ my: "1rem", gap: ".5rem" }}>
             <Input
               placeholder='Type something...'
@@ -32,7 +32,7 @@ const NoVowels: NextPage = () => {
               <IconButton aria-label="reset text" onClick={() => setText("")} icon={<SmallCloseIcon />} variant='ghost' />
             </InputRightElement>
           </InputGroup>
-        )}
+        </SlideFade>
         <Box sx={{ width: "100%", textAlign: "center", my: "1rem" }}>
           <Button
             aria-label='hide input area'
@@ -41,7 +41,7 @@ const NoVowels: NextPage = () => {
             {hide ? "Show" : "Hide"}
           </Button>
         </Box>
-        {text && (
+        <SlideFade in={text !== ""} offsetY="3rem">
           <Box borderWidth={1} borderRadius="lg" sx={{ my: "1rem", p: "1rem" }}>
             <Heading as="h3" size="lg" sx={{ textAlign: "center" }}>Result</Heading>
             <Text fontSize="xl" sx={{ letterSpacing: ".5rem" }}>
@@ -54,7 +54,7 @@ const NoVowels: NextPage = () => {
               }).join("")}
             </Text>
           </Box>
-        )}
+        </SlideFade>
       </Container>
     </>
   )

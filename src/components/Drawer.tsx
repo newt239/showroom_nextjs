@@ -1,11 +1,15 @@
-import React from "react"
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, IconButton, Input, Link, ListItem, UnorderedList, useDisclosure } from "@chakra-ui/react"
+import React, { useEffect } from "react"
+import NextLink from "next/link"
+import { useRouter } from 'next/router'
+import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, IconButton, Input, Link, ListItem, UnorderedList, useDisclosure } from "@chakra-ui/react"
 import { ExternalLinkIcon, HamburgerIcon } from "@chakra-ui/icons"
 
 
 export const DrawerComp = () => {
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  useEffect(() => onClose, [router]);
   return (
     <>
       <IconButton aria-label="open drawer" colorScheme='teal' onClick={onOpen} icon={<HamburgerIcon />}
@@ -20,10 +24,22 @@ export const DrawerComp = () => {
           <DrawerCloseButton />
           <DrawerHeader>SHOWROOM</DrawerHeader>
           <DrawerBody>
-            <UnorderedList>
-              <ListItem><Link href="/">Top</Link></ListItem>
-              <ListItem><Link href="/tetris">Tetris</Link></ListItem>
-              <ListItem><Link href="/no_vowels">No Vowels</Link></ListItem>
+            <UnorderedList spacing=".5rem">
+              <ListItem>
+                <NextLink href='/' passHref>
+                  <Link>Top</Link>
+                </NextLink>
+              </ListItem>
+              <ListItem>
+                <NextLink href='/tetris' passHref>
+                  <Link>Tetris</Link>
+                </NextLink>
+              </ListItem>
+              <ListItem>
+                <NextLink href='/no_vowels' passHref>
+                  <Link>No Vowels</Link>
+                </NextLink>
+              </ListItem>
             </UnorderedList>
           </DrawerBody>
           <DrawerFooter sx={{ justifyContent: "center" }}>

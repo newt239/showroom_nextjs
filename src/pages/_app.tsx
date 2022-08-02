@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <>
-        <Box sx={{ minHeight: "90vh" }}>
+        <Box sx={{ minHeight: "85vh" }}>
           <Component {...pageProps} />
         </Box>
         <Container sx={{ textAlign: "center", my: "1rem" }}>

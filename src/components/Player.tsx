@@ -15,6 +15,8 @@ const Player: NextPage = () => {
         if (!canMove(game.current.state, game.current.x, newY + 1)) {
           gameDispatch({ type: "reset" });
         }
+      } else {
+        gameDispatch({ type: "reset" });
       }
     }
   }

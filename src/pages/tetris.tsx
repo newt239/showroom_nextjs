@@ -1,14 +1,16 @@
+
 import { Context, createContext, Dispatch } from 'react';
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import styles from 'src/styles/Home.module.scss'
 
 import { Alert, AlertIcon, Flex, Heading } from '@chakra-ui/react'
+import Head from 'next/head'
 
-import TetrisGrid from 'src/components/TetrisGrid'
-import Player from 'src/components/Player'
+import type { NextPage } from 'next'
+
 import NextPreview from 'src/components/NextPreview'
+import Player from 'src/components/Player'
+import TetrisGrid from 'src/components/TetrisGrid'
 import { GameStateType, ActionType, useGameState } from 'src/store/game';
+import styles from 'src/styles/Home.module.scss'
 
 // https://zenn.dev/nfunato/articles/typing-ccontext-arg
 type GameContextType = {

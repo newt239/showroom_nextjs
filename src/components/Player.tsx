@@ -1,7 +1,10 @@
-import type { NextPage } from 'next'
-import { Button, Flex } from '@chakra-ui/react'
-import { ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon, ArrowUpIcon, RepeatIcon } from '@chakra-ui/icons'
 import { useContext, useEffect } from 'react'
+
+import { ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon, ArrowUpIcon, RepeatIcon } from '@chakra-ui/icons'
+import { Button, Flex } from '@chakra-ui/react'
+
+import type { NextPage } from 'next'
+
 import { GlobalContext } from 'src/pages/tetris'
 
 const Player: NextPage = () => {

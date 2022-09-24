@@ -1,8 +1,9 @@
-import type { NextPage } from 'next'
+import { Container, Heading, Link, ListItem, UnorderedList } from '@chakra-ui/react'
 import Head from 'next/head'
 import NextLink from "next/link"
 
-import { Container, Heading, Link, ListItem, UnorderedList } from '@chakra-ui/react'
+import type { NextPage } from 'next'
+
 
 const Home: NextPage = () => {
   return (

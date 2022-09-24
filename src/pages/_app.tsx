@@ -1,8 +1,9 @@
 import '../styles/globals.scss'
-import type { AppProps } from 'next/app'
-import ReactGA from "react-ga4";
-import { Box, ChakraProvider, Container, Link } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
+import { Box, ChakraProvider, Container, Link } from '@chakra-ui/react'
+import ReactGA from "react-ga4";
+
+import type { AppProps } from 'next/app'
 
 import { DrawerComp } from 'src/components/Drawer'
 

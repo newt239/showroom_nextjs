@@ -1,8 +1,10 @@
-import type { NextPage } from 'next'
+import { useContext } from 'react';
 
 import { Box, Flex } from '@chakra-ui/react';
+
+import type { NextPage } from 'next'
+
 import { tetromino, tetrominoColors } from 'src/libs/tetromino';
-import { useContext } from 'react';
 import { GlobalContext } from 'src/pages/tetris';
 
 const NextPreview: NextPage = () => {

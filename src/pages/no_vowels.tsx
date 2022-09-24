@@ -1,9 +1,11 @@
 import { ChangeEvent, useState } from 'react'
-import type { NextPage } from 'next'
+
+import { ChevronDownIcon, ChevronUpIcon, SmallCloseIcon } from '@chakra-ui/icons'
+import { Box, Button, Container, Heading, IconButton, Input, InputGroup, InputRightElement, SlideFade, Text } from '@chakra-ui/react'
 import Head from 'next/head'
 
-import { Box, Button, Container, Heading, IconButton, Input, InputGroup, InputRightElement, SlideFade, Text } from '@chakra-ui/react'
-import { ChevronDownIcon, ChevronUpIcon, SmallCloseIcon } from '@chakra-ui/icons'
+import type { NextPage } from 'next'
+
 
 const NoVowels: NextPage = () => {
   const [text, setText] = useState("");

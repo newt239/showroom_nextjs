@@ -26,6 +26,11 @@ const Home: NextPage = () => {
               <Link>No Vowels</Link>
             </NextLink>
           </ListItem>
+          <ListItem>
+            <NextLink href='/save_youtube_to_notion' passHref>
+              <Link>Save Youtube to Notion</Link>
+            </NextLink>
+          </ListItem>
         </UnorderedList>
       </Container>
     </>

@@ -55,6 +55,11 @@ export const DrawerComp = () => {
                   <Link>No Vowels</Link>
                 </NextLink>
               </ListItem>
+              <ListItem>
+                <NextLink href='/save_youtube_to_notion' passHref>
+                  <Link>Save Youtube to Notion</Link>
+                </NextLink>
+              </ListItem>
             </UnorderedList>
           </DrawerBody>
           <DrawerFooter sx={{ justifyContent: 'center' }}>

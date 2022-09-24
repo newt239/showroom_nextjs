@@ -21,6 +21,13 @@ import {
   Text,
   Th,
   Tr,
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  ListItem,
+  UnorderedList,
 } from '@chakra-ui/react'
 import axios from 'axios'
 import Head from 'next/head'
@@ -80,87 +87,80 @@ const SaveYoutubeToNotion: NextPage = () => {
         <Heading as='h2' sx={{ textAlign: 'center' }}>
           Save Youtube to Notion
         </Heading>
+        <Accordion allowToggle sx={{ my: '1rem' }}>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box flex='1' textAlign='left'>
+                  Database structure
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <UnorderedList>
+                <ListItem>
+                  <strong>Name</strong> - video title
+                </ListItem>
+                <ListItem>
+                  <strong>URL</strong> - link to youtube
+                </ListItem>
+                <ListItem>
+                  <strong>(children)</strong> - video description
+                </ListItem>
+              </UnorderedList>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
         <Box sx={{ my: '1rem' }}>
-          <Text sx={{ mb: '.5rem' }}>Notion API KEY</Text>
-          <InputGroup>
-            <Input
-              value={notionApiKey}
-              onChange={(e) => {
-                window.localStorage.setItem('notionApiKey', e.target.value)
-                setNotionApiKey(e.target.value)
-              }}
-            />
-            <InputRightElement>
-              <IconButton
-                aria-label='reset text'
-                onClick={() => setNotionApiKey('')}
-                icon={<SmallCloseIcon />}
-                variant='ghost'
-              />
-            </InputRightElement>
-          </InputGroup>
+          <Heading as='h3' size='md' sx={{ mb: '.5rem' }}>
+            Notion API KEY
+          </Heading>
+          <Input
+            value={notionApiKey}
+            onChange={(e) => {
+              window.localStorage.setItem('notionApiKey', e.target.value)
+              setNotionApiKey(e.target.value)
+            }}
+          />
         </Box>
         <Box sx={{ my: '1rem' }}>
-          <Text sx={{ mb: '.5rem' }}>Youtube API KEY</Text>
-          <InputGroup>
-            <Input
-              value={youtubeApiKey}
-              onChange={(e) => {
-                window.localStorage.setItem('youtubeApiKey', e.target.value)
-                setYoutubeApiKey(e.target.value)
-              }}
-            />
-            <InputRightElement>
-              <IconButton
-                aria-label='reset text'
-                onClick={() => setYoutubeApiKey('')}
-                icon={<SmallCloseIcon />}
-                variant='ghost'
-              />
-            </InputRightElement>
-          </InputGroup>
+          <Heading as='h3' size='md' sx={{ mb: '.5rem' }}>
+            Youtube API KEY
+          </Heading>
+          <Input
+            value={youtubeApiKey}
+            onChange={(e) => {
+              window.localStorage.setItem('youtubeApiKey', e.target.value)
+              setYoutubeApiKey(e.target.value)
+            }}
+          />
         </Box>
         <Box sx={{ my: '1rem' }}>
-          <Text sx={{ mb: '.5rem' }}>Notion database ID</Text>
-          <InputGroup>
-            <Input
-              value={databaseId}
-              onChange={(e) => {
-                window.localStorage.setItem('databaseId', e.target.value)
-                setDatabaseId(e.target.value)
-              }}
-            />
-            <InputRightElement>
-              <IconButton
-                aria-label='reset text'
-                onClick={() => setDatabaseId('')}
-                icon={<SmallCloseIcon />}
-                variant='ghost'
-              />
-            </InputRightElement>
-          </InputGroup>
+          <Heading as='h3' size='md' sx={{ mb: '.5rem' }}>
+            Notion database ID
+          </Heading>
+          <Input
+            value={databaseId}
+            onChange={(e) => {
+              window.localStorage.setItem('databaseId', e.target.value)
+              setDatabaseId(e.target.value)
+            }}
+          />
         </Box>
         <Box sx={{ my: '1rem' }}>
-          <Text sx={{ mb: '.5rem' }}>Youtube video URL</Text>
-          <InputGroup>
-            <Input
-              placeholder='https://youtube.com/xxxxxxxxxx'
-              value={url}
-              onChange={(e) => {
-                setstatus('waiting')
-                setUrl(e.target.value)
-              }}
-              disabled={status === 'loading'}
-            />
-            <InputRightElement>
-              <IconButton
-                aria-label='reset text'
-                onClick={() => setUrl('')}
-                icon={<SmallCloseIcon />}
-                variant='ghost'
-              />
-            </InputRightElement>
-          </InputGroup>
+          <Heading as='h3' size='md' sx={{ mb: '.5rem' }}>
+            Youtube video URL
+          </Heading>
+          <Input
+            placeholder='https://youtube.com/xxxxxxxxxx'
+            value={url}
+            onChange={(e) => {
+              setstatus('waiting')
+              setUrl(e.target.value)
+            }}
+            disabled={status === 'loading'}
+          />
         </Box>
         <Box
           sx={{
@@ -179,7 +179,7 @@ const SaveYoutubeToNotion: NextPage = () => {
           <Button
             aria-label='save to notion'
             onClick={saveToNotion}
-            disabled={!url.startsWith('https://')}
+            disabled={!url.startsWith('https://') || status === 'success'}
           >
             Save
           </Button>
@@ -190,7 +190,7 @@ const SaveYoutubeToNotion: NextPage = () => {
             borderRadius='lg'
             sx={{ my: '1rem', p: '1rem', textAlign: 'center' }}
           >
-            <Heading as='h3' size='lg'>
+            <Heading as='h3' size='lg' color='green.500'>
               Success!
             </Heading>
             {info && (

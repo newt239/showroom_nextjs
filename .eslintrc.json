@@ -5,6 +5,7 @@
     "plugin:import/warnings"
   ],
   "rules": {
+    "react-hooks/exhaustive-deps": "off",
     "import/order": [
       "error",
       {

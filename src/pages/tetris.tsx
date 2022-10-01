@@ -1,6 +1,6 @@
 import { Context, createContext, Dispatch } from "react";
 
-import { Alert, AlertIcon, Flex, Heading } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Flex, Heading } from "@chakra-ui/react";
 import Head from "next/head";
 
 import type { NextPage } from "next";
@@ -9,7 +9,6 @@ import NextPreview from "src/components/NextPreview";
 import Player from "src/components/Player";
 import TetrisGrid from "src/components/TetrisGrid";
 import { GameStateType, ActionType, useGameState } from "src/store/game";
-import styles from "src/styles/Home.module.scss";
 
 // https://zenn.dev/nfunato/articles/typing-ccontext-arg
 type GameContextType = {
@@ -24,7 +23,7 @@ const Tetris: NextPage = () => {
   GlobalContext = createContext(value);
   return (
     <GlobalContext.Provider value={value}>
-      <div className={styles.container}>
+      <Box sx={{ p: "0 2rem" }}>
         <Head>
           <title>Next TETRIS</title>
           <meta
@@ -33,7 +32,16 @@ const Tetris: NextPage = () => {
           />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main className={styles.main}>
+        <Box
+          sx={{
+            minHeight: "100vh",
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Flex style={{ flexDirection: "column", textAlign: "center" }}>
             <Heading as="h1">Welcome to Next TETRIS!</Heading>
             <p>score:{game.score}</p>
@@ -61,8 +69,8 @@ const Tetris: NextPage = () => {
               <Player />
             </Flex>
           </Flex>
-        </main>
-      </div>
+        </Box>
+      </Box>
     </GlobalContext.Provider>
   );
 };

@@ -1,4 +1,3 @@
-import "../styles/globals.scss";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { Box, ChakraProvider, Container, Link } from "@chakra-ui/react";
 import ReactGA from "react-ga4";

@@ -5,9 +5,9 @@ import Head from "next/head";
 
 import type { NextPage } from "next";
 
-import NextPreview from "src/components/NextPreview";
-import Player from "src/components/Player";
-import TetrisGrid from "src/components/TetrisGrid";
+import TetrisGrid from "src/components/tetris/Grid";
+import NextPreview from "src/components/tetris/NextPreview";
+import Player from "src/components/tetris/Player";
 import { GameStateType, ActionType, useGameState } from "src/store/game";
 
 // https://zenn.dev/nfunato/articles/typing-ccontext-arg

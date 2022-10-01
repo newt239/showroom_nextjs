@@ -10,7 +10,6 @@ import {
   DrawerHeader,
   DrawerOverlay,
   IconButton,
-  Input,
   Link,
   ListItem,
   UnorderedList,
@@ -19,6 +18,7 @@ import {
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 
+import routes from "src/libs/routes";
 export const DrawerComp = () => {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,26 +40,13 @@ export const DrawerComp = () => {
           <DrawerHeader>SHOWROOM</DrawerHeader>
           <DrawerBody>
             <UnorderedList spacing=".5rem">
-              <ListItem>
-                <NextLink href="/" passHref>
-                  <Link>Top</Link>
-                </NextLink>
-              </ListItem>
-              <ListItem>
-                <NextLink href="/tetris" passHref>
-                  <Link>Tetris</Link>
-                </NextLink>
-              </ListItem>
-              <ListItem>
-                <NextLink href="/no_vowels" passHref>
-                  <Link>No Vowels</Link>
-                </NextLink>
-              </ListItem>
-              <ListItem>
-                <NextLink href="/save_youtube_to_notion" passHref>
-                  <Link>Save Youtube to Notion</Link>
-                </NextLink>
-              </ListItem>
+              {routes.map((route) => (
+                <ListItem key={route.path}>
+                  <NextLink href={route.path} passHref>
+                    <Link>{route.name}</Link>
+                  </NextLink>
+                </ListItem>
+              ))}
             </UnorderedList>
           </DrawerBody>
           <DrawerFooter sx={{ justifyContent: "center" }}>

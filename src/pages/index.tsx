@@ -10,6 +10,8 @@ import NextLink from "next/link";
 
 import type { NextPage } from "next";
 
+import routes from "src/libs/routes";
+
 const Home: NextPage = () => {
   return (
     <>
@@ -22,21 +24,13 @@ const Home: NextPage = () => {
           SHOWROOM
         </Heading>
         <UnorderedList spacing=".5rem" sx={{ my: "1rem" }}>
-          <ListItem>
-            <NextLink href="/tetris" passHref>
-              <Link>Tetris</Link>
-            </NextLink>
-          </ListItem>
-          <ListItem>
-            <NextLink href="/no_vowels" passHref>
-              <Link>No Vowels</Link>
-            </NextLink>
-          </ListItem>
-          <ListItem>
-            <NextLink href="/save_youtube_to_notion" passHref>
-              <Link>Save Youtube to Notion</Link>
-            </NextLink>
-          </ListItem>
+          {routes.map((route) => (
+            <ListItem key={route.path}>
+              <NextLink href={route.path} passHref>
+                <Link>{route.name}</Link>
+              </NextLink>
+            </ListItem>
+          ))}
         </UnorderedList>
       </Container>
     </>

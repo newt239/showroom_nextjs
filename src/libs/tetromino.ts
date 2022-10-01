@@ -1,4 +1,4 @@
-import { theme } from '@chakra-ui/react'
+import { theme } from "@chakra-ui/react";
 
 export const tetromino = [
   [
@@ -57,7 +57,7 @@ export const tetromino = [
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ],
-]
+];
 export const tetrominoColors = [
   theme.colors.white[0],
   theme.colors.blue[500],
@@ -66,4 +66,4 @@ export const tetrominoColors = [
   theme.colors.red[500],
   theme.colors.yellow[500],
   theme.colors.orange[500],
-]
+];

@@ -1,42 +1,45 @@
-import { CreatePageParameters } from '@notionhq/client/build/src/api-endpoints'
-import Youtube, { YoutubeVideoSnippet } from 'youtube.ts'
+import { CreatePageParameters } from "@notionhq/client/build/src/api-endpoints";
+import Youtube, { YoutubeVideoSnippet } from "youtube.ts";
 
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 type ParagraphBlock = {
-  type: 'paragraph'
+  type: "paragraph";
   paragraph: {
     rich_text: {
-      type: 'text'
+      type: "text";
       text: {
-        content: string
-        link: null
-      }
-    }[]
-  }
-}
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { Client } = require('@notionhq/client')
+        content: string;
+        link: null;
+      };
+    }[];
+  };
+};
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const { Client } = require("@notionhq/client");
   const notion = new Client({
     auth: req.body.notionApiKey,
-  })
-  const youtube = new Youtube(req.body.youtubeApiKey)
-  const video = await youtube.videos.get(req.body.url)
-  const descriptionParagraph: ParagraphBlock[] = []
-  for (const eachParagraph of video.snippet.description.split('\n\n')) {
+  });
+  const youtube = new Youtube(req.body.youtubeApiKey);
+  const video = await youtube.videos.get(req.body.url);
+  const descriptionParagraph: ParagraphBlock[] = [];
+  for (const eachParagraph of video.snippet.description.split("\n\n")) {
     descriptionParagraph.push({
-      type: 'paragraph',
+      type: "paragraph",
       paragraph: {
         rich_text: [
           {
-            type: 'text',
+            type: "text",
             text: {
-              content: eachParagraph + '\n',
+              content: eachParagraph + "\n",
               link: null,
             },
           },
         ],
       },
-    })
+    });
   }
   const parameters: CreatePageParameters = {
     parent: {
@@ -53,33 +56,35 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ],
       },
       URL: {
-        url: 'https://youtube.com/watch?v=' + video.id,
+        url: "https://youtube.com/watch?v=" + video.id,
       },
     },
     children: descriptionParagraph,
     icon: {
-      type: 'external',
+      type: "external",
       external: {
-        url: 'https://www.youtube.com/s/desktop/e06db45c/img/favicon_144x144.png',
+        url: "https://www.youtube.com/s/desktop/e06db45c/img/favicon_144x144.png",
       },
     },
     cover: {
-      type: 'external',
+      type: "external",
       external: {
         url: getLargerYoutubeThumbnail(video.snippet.thumbnails),
       },
     },
-  } as CreatePageParameters
-  const response = await notion.pages.create(parameters)
-  res.status(200).json(response)
+  } as CreatePageParameters;
+  const response = await notion.pages.create(parameters);
+  res.status(200).json(response);
 }
 
-const getLargerYoutubeThumbnail = (thumbnails: YoutubeVideoSnippet['thumbnails']) => {
+const getLargerYoutubeThumbnail = (
+  thumbnails: YoutubeVideoSnippet["thumbnails"]
+) => {
   if (thumbnails.maxres) {
-    return thumbnails.maxres.url
+    return thumbnails.maxres.url;
   } else if (thumbnails.standard) {
-    return thumbnails.standard.url
+    return thumbnails.standard.url;
   } else {
-    return thumbnails.high.url
+    return thumbnails.high.url;
   }
-}
+};

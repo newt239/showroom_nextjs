@@ -114,41 +114,59 @@ const SaveYoutubeToNotion: NextPage = () => {
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
-        <Box sx={{ my: "1rem" }}>
-          <Heading as="h3" size="md" sx={{ mb: ".5rem" }}>
-            Notion API KEY
+        <Box
+          sx={{
+            my: "1rem",
+            p: "1rem",
+            borderWidth: 1,
+            borderRadius: "lg",
+            borderColor: "blue.500",
+          }}
+        >
+          <Heading
+            as="h3"
+            size="lg"
+            color="blue.500"
+            sx={{ textAlign: "center" }}
+          >
+            Settings
           </Heading>
-          <Input
-            value={notionApiKey}
-            onChange={(e) => {
-              window.localStorage.setItem("notionApiKey", e.target.value);
-              setNotionApiKey(e.target.value);
-            }}
-          />
-        </Box>
-        <Box sx={{ my: "1rem" }}>
-          <Heading as="h3" size="md" sx={{ mb: ".5rem" }}>
-            Youtube API KEY
-          </Heading>
-          <Input
-            value={youtubeApiKey}
-            onChange={(e) => {
-              window.localStorage.setItem("youtubeApiKey", e.target.value);
-              setYoutubeApiKey(e.target.value);
-            }}
-          />
-        </Box>
-        <Box sx={{ my: "1rem" }}>
-          <Heading as="h3" size="md" sx={{ mb: ".5rem" }}>
-            Notion database ID
-          </Heading>
-          <Input
-            value={databaseId}
-            onChange={(e) => {
-              window.localStorage.setItem("databaseId", e.target.value);
-              setDatabaseId(e.target.value);
-            }}
-          />
+          <Box sx={{ my: "1rem" }}>
+            <Heading as="h4" size="md" sx={{ mb: ".5rem" }}>
+              Notion API KEY
+            </Heading>
+            <Input
+              value={notionApiKey}
+              onChange={(e) => {
+                window.localStorage.setItem("notionApiKey", e.target.value);
+                setNotionApiKey(e.target.value);
+              }}
+            />
+          </Box>
+          <Box sx={{ my: "1rem" }}>
+            <Heading as="h3" size="md" sx={{ mb: ".5rem" }}>
+              Youtube API KEY
+            </Heading>
+            <Input
+              value={youtubeApiKey}
+              onChange={(e) => {
+                window.localStorage.setItem("youtubeApiKey", e.target.value);
+                setYoutubeApiKey(e.target.value);
+              }}
+            />
+          </Box>
+          <Box sx={{ my: "1rem" }}>
+            <Heading as="h3" size="md" sx={{ mb: ".5rem" }}>
+              Notion database ID
+            </Heading>
+            <Input
+              value={databaseId}
+              onChange={(e) => {
+                window.localStorage.setItem("databaseId", e.target.value);
+                setDatabaseId(e.target.value);
+              }}
+            />
+          </Box>
         </Box>
         <Box sx={{ my: "1rem" }}>
           <Heading as="h3" size="md" sx={{ mb: ".5rem" }}>
@@ -172,7 +190,7 @@ const SaveYoutubeToNotion: NextPage = () => {
             gap: "1rem",
             width: "100%",
             textAlign: "center",
-            my: "1rem",
+            mt: "1rem",
           }}
         >
           {status === "loading" && (
@@ -187,17 +205,23 @@ const SaveYoutubeToNotion: NextPage = () => {
             aria-label="save to notion"
             onClick={saveToNotion}
             disabled={!url.startsWith("https://") || status === "success"}
+            colorScheme="blue"
           >
             Save
           </Button>
         </Box>
         <SlideFade in={status === "success"} offsetY="3rem">
           <Box
-            borderWidth={1}
-            borderRadius="lg"
-            sx={{ my: "1rem", p: "1rem", textAlign: "center" }}
+            sx={{
+              my: "1rem",
+              p: "1rem",
+              borderWidth: 1,
+              borderRadius: "lg",
+              borderColor: "green.500",
+              textAlign: "center",
+            }}
           >
-            <Heading as="h3" size="lg" color="green.500">
+            <Heading as="h3" size="lg" color="green.500" sx={{ mb: 5 }}>
               Success!
             </Heading>
             {info && (
